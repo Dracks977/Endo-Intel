@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="css/bootadmin.min.css">
+    <link rel="stylesheet" href="css/datatables.min.css">
+    <link rel="stylesheet" href="css/table.css">
+
+    <title>ENDO - Intel</title>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand navbar-dark bg-primary">
+        <a class="sidebar-toggle mr-3" href="#"><i class="fa fa-bars"></i></a>
+        <a class="navbar-brand" href="#">ENDO - Intel</a>
+    </nav>
+
+    <div class="d-flex">
+        <div class="sidebar sidebar-dark bg-dark">
+            <ul class="list-unstyled">
+                <li><a href="#"><i class="fa fa-fw fa-link"></i> Menu Item</a></li>
+                <li>
+                    <a href="#sm_expand_1" data-toggle="collapse">
+                        <i class="fa fa-fw fa-link"></i> Expandable Menu Item
+                    </a>
+                    <ul id="sm_expand_1" class="list-unstyled collapse">
+                        <li><a href="#">Submenu Item</a></li>
+                        <li><a href="#">Submenu Item</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-fw fa-link"></i> Menu Item</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-link"></i> Menu Item</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-link"></i> Menu Item</a></li>
+            </ul>
+        </div>
+
+        <div class="content p-4">
+            <h2 class="mb-4">Member Approval</h2>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table id="table_id" class="display">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>handler</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i<users.length; i++) { %>
+                            <tr>
+                                <td><%= users[i].ID %></td>
+                                <td><%= users[i].Name %></td>
+                                <% if (users[i].role) {%>
+                                <% if (users[i].role == 0) {%>
+                                <td><span class="badge badge-success">Spy</span></td>
+                                <% } else if (users[i].role == 1) {%>
+                                <td><span class="badge badge-info">Strat FC</span></td>
+                                <% } else if (users[i].role == 2) {%>
+                                <td><span class="badge badge-secondary">Handler</span></td>
+                                <% } else if (users[i].role == 3) {%>
+                                <td><span class="badge badge-primary">Admin</span></td>
+                                <% } else if (users[i].role == -1) {%>
+                                <td><span class="badge badge-dark">Black List</span></td>
+                                <% } %>
+                                <% } else { %>
+                                <td><span class="badge badge-warning">Under review</span></td>
+                                <% } %>
+                                <% if (users[i].handler) {%>
+                                <td><%= users[i].handler %></td>
+                                <% } else { %>
+                                <td></td>
+                                <% } %>
+                                <td class="dt-center"><button id='<%= users[i].ID %>' data-toggle="modal" onclick="modalrole('<%= users[i].Name %>', '<%= users[i].ID %>')" data-target="#exampleModalCenter" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit Member</button></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="/RoleM" id="modalf">
+                                        <div class="form-group">
+                                            <label for="role">Role</label>
+                                            <select class="form-control" id="role" name="role">
+                                                <option value="-1">Black List</option>
+                                                <option value="0">Spy</option>
+                                                <option value="1">Strat FC</option>
+                                                <option value="2">Handler</option>
+                                                <option value="3">Admin</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="handler">Handler</label>
+                                            <select class="form-control" id="handler" name="handler">
+                                                <option value=" "></option>
+                                               <% for(var i=0; i<users.length; i++) { %>
+                                               <option value="<%= users[i].Name %>"><%= users[i].Name %></option>
+                                               <% } %>
+                                           </select>
+                                       </div>
+                                       <div style="display: none" class="form-group">
+                                        <input type="text" class="form-control" id="IDmodal" name="ID">
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button form="modalf" type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/bootadmin.min.js"></script>
+<script src="js/datatables.min.js"></script>
+<script type="text/javascript">
+
+  function modalrole(name, id){
+    $('#exampleModalCenterTitle').text(name);
+    $('#IDmodal').val(id);
+}
+$(document).ready( function () {
+
+    $('#table_id').DataTable();
+
+} );
+</script>
+
+</body>
+</html>
