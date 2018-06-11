@@ -12,7 +12,7 @@ module.exports = function(app, path, ejs, fs, users, esso){
 				if (ress.role == undefined){
 					res.send("hola ta pas de grade");
 				} else if (ress.role == 0) {
-					res.send("welcome spy");
+					res.redirect('/submit');
 				} else if (ress.role == 1) {
 					res.send("welcome stratFC");
 				} else if (ress.role == 2) {

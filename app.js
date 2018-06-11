@@ -37,9 +37,11 @@ MongoClient.connect(url, function(err, client) {
 	const db = client.db('ENDO');
 	assert.equal(null, err);
 	const users = db.collection('users');
+	const intel = db.collection('intel');
 	/*------include fichier------*/
 	require('./src/log.js')(app, path, ejs, fs, users, esso);
-	require('./src/admin.js')(app, path, ejs, fs, users, esso);
+	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
+	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 })
 
 /*======================route fichier static (public)====================*/
