@@ -1,5 +1,5 @@
 module.exports = function(app, path, ejs, fs, intel, esso){
-
+	ObjectId = require('mongodb').ObjectID;
 	/*
 	* Route page spy
 	*/
@@ -14,7 +14,7 @@ module.exports = function(app, path, ejs, fs, intel, esso){
 						}
 							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result});  //get redered HTML code
 							res.end(renderedHtml);
-   						});
+						});
 				})
 			} else {
 				res.redirect('/');
@@ -38,6 +38,31 @@ module.exports = function(app, path, ejs, fs, intel, esso){
 				res.redirect('/submit');
 			}
 		})	
+	});
+
+	/*
+	* Route de ajout intel
+	* 
+	*/
+	app.post('/EditIntel', (req, res, next) => {
+		if (req.session.db){
+			if (req.session.db.role >= 0){
+				let request = {"Group":req.body.Group,"Date":req.body.Date,"Type":req.body.Type,"FC":req.body.FC,"Doctrine":req.body.Doctrine,"Comment":req.body.Comment}
+				console.log(req.body._id)
+				console.log(request)
+				intel.update({_id : ObjectId(req.body._id)}, {$set:request},function(err, ress){
+					if (err)
+						res.send(err);
+					else{
+						res.redirect('/submit');
+					}
+				})
+			} else {
+				res.redirect('/');
+			}
+		} else {
+			res.redirect('/');
+		}
 	});
 
 }

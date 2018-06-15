@@ -66,7 +66,7 @@
                                     <td><%= intel[i].Doctrine %></td>
                                     <td><%= intel[i].Comment %></td>
                                     <td><%= intel[i].Author_Name %></td>
-                                    <td class="dt-center"><button id='' data-toggle="modal" data-target="" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit Intel</button></td>
+                                     <td class="dt-center"><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit Intel</button></td>
                                     </tr>
                             <% } %>
                         <tbody>
@@ -145,6 +145,73 @@
         </div>
     </div>
 
+     <!-- modal edit -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editmodal">Edit Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/AEditIntel" id="modaledit">
+
+                        <div class="form-group">
+                            <label for="Group">Group</label>
+                            <input type="text" class="form-control" id="eGroup" name="Group" placeholder="Group">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Date">Date</label>
+                            <input type="text" class="form-control" id="eDate" name="Date" placeholder="Date">
+                        </div>
+
+                           <div class="form-group">
+                            <label for="Type">Type</label>
+                            <input type="text" class="form-control" id="eType" name="Type" placeholder="Type">
+                        </div>
+
+                      <!--   <div class="form-group">
+                            <label for="role">Type</label>
+                            <select class="form-control" id="role" name="Type">
+                                <option value="FUN">FUN</option>
+                                <option value="Roaming">Roaming</option>
+                                <option value="Strat OP">Strat OP</option>
+                                <option value="CTA">CTA</option>
+                                <option value="RED PEN">RED PEN</option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="FC">FC</label>
+                            <input type="text" class="form-control" id="eFC" name="FC" placeholder="FC">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Doctrine">Doctrine</label>
+                            <input type="text" class="form-control" id="eDoctrine" name="Doctrine" placeholder="Doctrine">
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label for="Comment">Comment</label>
+                            <textarea class="form-control" form="modaledit" id="eComment" name='Comment' rows="3"></textarea>
+                        </div>
+                           <div style="display: none" class="form-group">
+                            <input type="text" class="form-control" id="e_id" name="_id">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button form="modaledit" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/bootadmin.min.js"></script>
@@ -153,12 +220,19 @@
      <script src="js/bootstrap-material-datetimepicker.js"></script>
     <script type="text/javascript">
 
-      function modalrole(name, id){
-        $('#exampleModalCenterTitle').text(name);
-        $('#IDmodal').val(id);
+      function modaledit(intel){
+        console.log(intel.Group)
+        $('#eGroup').val(intel.Group);
+        $('#eDate').val(intel.Date);
+        $('#eType').val(intel.Type);
+        $('#eFC').val(intel.FC);
+        $('#eDoctrine').val(intel.Doctrine);
+        $('#eComment').val(intel.Comment);
+        $('#e_id').val(intel._id);
     }
     $(document).ready( function () {
-              $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
+        $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
+        $('#eDate').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#table_id').DataTable();
 
     } );
