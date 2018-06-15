@@ -1,4 +1,5 @@
 /*=====================Initialisation=====================*/
+require('dotenv').config();
 const express   =     require("express");
 const app       =     express();
 const http = require('http').Server(app);
@@ -11,7 +12,7 @@ const MongoClient = require('mongodb').MongoClient
 ObjectID = require('mongodb').ObjectID;
 const path = require('path');
 const session = require('express-session');
-const url = 'mongodb://localhost:27017/ENDO';
+const url = 'mongodb://'+ process.env.DB_HOST +':'+ process.env.DB_PORT +'/' + process.env.DB_NAME;
 const esso = require('eve-sso-simple');
 /*======================================================*/
 
@@ -20,7 +21,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.use(session(
 {
-	secret: 'eenvdeo',
+	secret: process.env.COOKIE,
 	saveUninitialized: false,
 	resave: false
 }
@@ -34,7 +35,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 /*======================routes==========================*/ 
 MongoClient.connect(url, function(err, client) {
-	const db = client.db('ENDO');
+	const db = client.db(process.env.DB_NAME);
 	assert.equal(null, err);
 	const users = db.collection('users');
 	const intel = db.collection('intel');
@@ -53,6 +54,6 @@ app.use("/webfonts", express.static(__dirname + '/public/webfonts'));
 
 
 /*==================start serv==================*/
-http.listen(80, function(){
-	console.log('listening on *:80');
+http.listen(process.env.PORT, function(){
+	console.log('listening on *:' + process.env.PORT);
 });

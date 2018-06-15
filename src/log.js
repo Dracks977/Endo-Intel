@@ -5,9 +5,7 @@ module.exports = function(app, path, ejs, fs, users, esso){
 	*/
 	app.get('/', function(req, res){
 		if (req.session.userinfo) {
-			console.log(req.session.userinfo[1].CharacterID)
-			users.findOne({"ID" : req.session.userinfo[1].CharacterID},function(err, ress){
-				console.log(ress)
+ 			users.findOne({"ID" : req.session.userinfo[1].CharacterID},function(err, ress){
 				req.session.db = ress;
 				if (ress.role == undefined){
 					res.send("hola ta pas de grade");
@@ -27,9 +25,9 @@ module.exports = function(app, path, ejs, fs, users, esso){
 		} else {
 			esso.login(
 			{
-				client_id: 'bbf65f4885be41138e8369efb630f04b',
-				client_secret: 'ZCHdqUuyNqroVPo7vTdvF8dVLUghrVzZSQ6oFVze',
-				redirect_uri: 'http://localhost/callback/'
+				client_id: process.env.C_ID,
+				client_secret: process.env.C_SECRET,
+				redirect_uri:  process.env.CALLBACK
 			}, res);
 		}
 		
@@ -40,14 +38,13 @@ module.exports = function(app, path, ejs, fs, users, esso){
 	*/
 	app.get('/callback/', function(req, res){
 		esso.getTokens({
-			client_id: 'bbf65f4885be41138e8369efb630f04b',
-			client_secret: 'ZCHdqUuyNqroVPo7vTdvF8dVLUghrVzZSQ6oFVze'
+			client_id: process.env.C_ID,
+			client_secret: process.env.C_SECRET
 		}, req, res, 
 		(accessToken, charToken) => {
 			req.session.userinfo = [accessToken, charToken];
 			// ici si utilisateur autoriser panel sinon attente validation
 			users.update({"ID" : charToken.CharacterID}, {$set:{"ID" : charToken.CharacterID, "Name" : charToken.CharacterName, "date" : Date()}}, { upsert: true },function(err, ress){
-				console.log(ress.result);
 				res.redirect('/');
 			})
 		}

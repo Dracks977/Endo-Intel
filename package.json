@@ -9,6 +9,7 @@
   "author": "Dracks",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
     "eve-sso-simple": "^2.0.1",
     "express": "^4.16.3",

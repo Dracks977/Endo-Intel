@@ -8,13 +8,11 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 			if (req.session.db.role == 3){
 
 				users.find({}).toArray(function(err, result) {
-					console.dir(result);
 					fs.readFile(path.resolve(__dirname + '/../public/view/admin.html'), 'utf-8', function(err, content) {
 						if (err) {
 							res.end('error occurred' + err);
 							return;
 						} 
-						console.log(req.session.db)
    						let renderedHtml = ejs.render(content, {users: result, name: req.session.db.Name});  //get redered HTML code
    						res.end(renderedHtml);
    					});
@@ -40,7 +38,6 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 							res.end('error occurred' + err);
 							return;
 						}
-							console.log(result);
 							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result});  //get redered HTML code
 							res.end(renderedHtml);
    						});
