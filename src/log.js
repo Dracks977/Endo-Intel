@@ -12,9 +12,9 @@ module.exports = function(app, path, ejs, fs, users, esso){
 				} else if (ress.role == 0) {
 					res.redirect('/submit');
 				} else if (ress.role == 1) {
-					res.send("welcome stratFC");
+					res.redirect('/intel');
 				} else if (ress.role == 2) {
-					res.send("welcome handler");
+					res.redirect('/intel');
 				} else if (ress.role == 3) {
 					res.redirect('/admin');
 				} else {
