@@ -2,12 +2,14 @@ module.exports = function(app, path, ejs, fs, users, esso){
 
 	/*
 	* Route page d'acceuil
+	* redirige les diferent role vers leurs pages
 	*/
 	app.get('/', function(req, res){
 		if (req.session.userinfo) {
- 			users.findOne({"ID" : req.session.userinfo[1].CharacterID},function(err, ress){
+			users.findOne({"ID" : req.session.userinfo[1].CharacterID},function(err, ress){
 				req.session.db = ress;
 				if (ress.role == undefined){
+					//ici mettre une page
 					res.send("hola ta pas de grade");
 				} else if (ress.role == 0) {
 					res.redirect('/submit');
@@ -34,7 +36,7 @@ module.exports = function(app, path, ejs, fs, users, esso){
 	})
 	
 	/*
-	* callback
+	* callback fonction for eve sso
 	*/
 	app.get('/callback/', function(req, res){
 		esso.getTokens({
@@ -43,12 +45,23 @@ module.exports = function(app, path, ejs, fs, users, esso){
 		}, req, res, 
 		(accessToken, charToken) => {
 			req.session.userinfo = [accessToken, charToken];
-			// ici si utilisateur autoriser panel sinon attente validation
 			users.update({"ID" : charToken.CharacterID}, {$set:{"ID" : charToken.CharacterID, "Name" : charToken.CharacterName, "date" : Date()}}, { upsert: true },function(err, ress){
 				res.redirect('/');
 			})
 		}
 		);
+	});
+
+	/*
+	* logout
+	*/
+	app.get('/logout', function(req, res){
+		if (req.session.userinfo){
+			req.session.destroy();
+			res.redirect('/');
+		}
+		else
+			res.redirect('/');
 	});
 
 	
