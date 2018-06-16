@@ -12,7 +12,7 @@ module.exports = function(app, path, ejs, fs, intel, esso){
 							res.end('error occurred' + err);
 							return;
 						}
-							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result});  //get redered HTML code
+							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result, sname: process.env.S_NAME});  //get redered HTML code
 							res.end(renderedHtml);
 						});
 				})

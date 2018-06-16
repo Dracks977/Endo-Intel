@@ -13,7 +13,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 							res.end('error occurred' + err);
 							return;
 						} 
-   						let renderedHtml = ejs.render(content, {users: result, name: req.session.db.Name});  //get redered HTML code
+   						let renderedHtml = ejs.render(content, {users: result, name: req.session.db.Name, sname: process.env.S_NAME});  //get redered HTML code
    						res.end(renderedHtml);
    					});
 				});
@@ -38,7 +38,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 							res.end('error occurred' + err);
 							return;
 						}
-							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result,role: req.session.db.role});  //get redered HTML code
+							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result,role: req.session.db.role, sname: process.env.S_NAME});  //get redered HTML code
 							res.end(renderedHtml);
 						});
 				})
