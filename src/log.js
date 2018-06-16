@@ -10,7 +10,7 @@ module.exports = function(app, path, ejs, fs, users, esso){
 				req.session.db = ress;
 				if (ress.role == undefined){
 					//ici mettre une page
-					res.send("hola ta pas de grade");
+					res.sendFile(path.resolve(__dirname + '/../public/view/under.html'))
 				} else if (ress.role == 0) {
 					res.redirect('/submit');
 				} else if (ress.role == 1) {
