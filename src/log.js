@@ -16,7 +16,7 @@ module.exports = function(app, path, ejs, fs, users, esso){
 				} else if (ress.role == 1) {
 					res.redirect('/intel');
 				} else if (ress.role == 2) {
-					res.redirect('/intel');
+					res.redirect('/admin');
 				} else if (ress.role == 3) {
 					res.redirect('/admin');
 				} else {

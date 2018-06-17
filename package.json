@@ -4,7 +4,8 @@
   "description": "intel panel for endo",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sudo pm2 start app.js"
   },
   "author": "Dracks",
   "license": "ISC",

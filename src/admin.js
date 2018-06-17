@@ -5,7 +5,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	*/
 	app.get('/admin', function(req, res){
 		if (req.session.db){
-			if (req.session.db.role == 3){
+			if (req.session.db.role >= 2){
 
 				users.find({}).toArray(function(err, result) {
 					fs.readFile(path.resolve(__dirname + '/../public/view/admin.html'), 'utf-8', function(err, content) {
@@ -13,7 +13,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 							res.end('error occurred' + err);
 							return;
 						} 
-   						let renderedHtml = ejs.render(content, {users: result, name: req.session.db.Name, sname: process.env.S_NAME});  //get redered HTML code
+   						let renderedHtml = ejs.render(content, {users: result, name: req.session.db.Name, sname: process.env.S_NAME, role: req.session.db.role});  //get redered HTML code
    						res.end(renderedHtml);
    					});
 				});
@@ -55,7 +55,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	* Edit membres
 	*/
 	app.post('/RoleM', (req, res) => {
-		if (req.session.db.role == 3){
+		if (req.session.db.role >= 2){
 			let request = {handler: req.body.handler, role: req.body.role }
 			users.update({ID : parseInt(req.body.ID)},{$set : request},function(err, ress){
 				if (err)
@@ -75,7 +75,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	*/
 	app.post('/AEditIntel', (req, res, next) => {
 		if (req.session.db){
-			if (req.session.db.role == 3){
+			if (req.session.db.role >= 2){
 				let request = {"Group":req.body.Group,"Date":req.body.Date,"Type":req.body.Type,"FC":req.body.FC,"Doctrine":req.body.Doctrine,"Comment":req.body.Comment}
 				console.log(req.body._id)
 				console.log(request)
