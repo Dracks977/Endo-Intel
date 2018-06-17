@@ -54,7 +54,7 @@
                                 <th>FC</th>
                                 <th>Doctrine</th>
                                 <th>Comment</th>
-                                <% if (role >= 2) { %>
+                                <% if (role == 3) { %>
                                 <th>By</th>
                                 <th>Action</th>
                                  <% } %>
@@ -69,7 +69,7 @@
                                     <td><%= intel[i].FC %></td>
                                     <td><%= intel[i].Doctrine %></td>
                                     <td><%= intel[i].Comment %></td>
-                                     <% if (role >= 2) { %>
+                                     <% if (role == 3) { %>
                                     <td><%= intel[i].Author_Name %></td>
                                      <td class="dt-center"><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit Intel</button></td>
                                     </tr>
