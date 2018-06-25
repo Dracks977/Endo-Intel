@@ -72,7 +72,7 @@
                                     <td><%= intel[i].Comment %></td>
                                      <% if (role == 3) { %>
                                     <td><%= intel[i].Author_Name %></td>
-                                     <td class="dt-center"><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit Intel</button><button type="button" class="btn btn-outline-danger">Danger</button></td>
+                                     <td class="dt-center"><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit</button><button type="button" class="btn btn-outline-danger btn-sm">Remove</button></td>
                                     </tr>
                                     <% } %>
                             <% } %>
