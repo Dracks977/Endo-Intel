@@ -35,7 +35,10 @@ module.exports = function(app, path, ejs, fs, intel, esso){
 			if (err)
 				res.send(err);
 			else{
-				res.redirect('/submit');
+				if (req.session.db.role == 1)
+					res.redirect('/submit');
+				else
+					res.redirect('/intel');
 			}
 		})	
 	});
