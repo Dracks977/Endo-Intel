@@ -31,7 +31,7 @@
         </div>
     </nav>
 
-   <div class="d-flex">
+    <div class="d-flex">
         <div class="sidebar sidebar-dark bg-dark">
             <ul class="list-unstyled">
                 <% if (role >= 2) { %>
@@ -58,24 +58,24 @@
                                 <% if (role == 3) { %>
                                 <th>By</th>
                                 <th>Action</th>
-                                 <% } %>
+                                <% } %>
                             </tr>
                         </thead>
-                       
-                            <% for(var i=0; i<intel.length; i++) { %>
-                             <tr> 
-                                    <td><%= intel[i].Group %></td>
-                                    <td><%= intel[i].Type %></td>
-                                    <td><%= intel[i].Date %></td>
-                                    <td><%= intel[i].FC %></td>
-                                    <td><%= intel[i].Doctrine %></td>
-                                    <td><%= intel[i].Comment %></td>
-                                     <% if (role == 3) { %>
-                                    <td><%= intel[i].Author_Name %></td>
-                                     <td class="dt-center"><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit</button><button type="button" class="btn btn-outline-danger btn-sm">Remove</button></td>
-                                    </tr>
-                                    <% } %>
-                            <% } %>
+                        
+                        <% for(var i=0; i<intel.length; i++) { %>
+                        <tr> 
+                            <td><%= intel[i].Group %></td>
+                            <td><%= intel[i].Type %></td>
+                            <td><%= intel[i].Date %></td>
+                            <td><%= intel[i].FC %></td>
+                            <td><%= intel[i].Doctrine %></td>
+                            <td><%= intel[i].Comment %></td>
+                            <% if (role == 3) { %>
+                            <td><%= intel[i].Author_Name %></td>
+                            <td class="dt-center"><div><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit</button><button style='margin-left: 1em;'type="button" class="btn btn-outline-danger btn-sm">Remove</button></div></td>
+                        </tr>
+                        <% } %>
+                        <% } %>
                         <tbody>
 
                         </tbody>
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-  <!-- modal add -->
+    <!-- modal add -->
     <div class="modal fade" id="addop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -108,7 +108,7 @@
                             <input type="text" class="form-control" id="Date" name="Date" placeholder="Date">
                         </div>
 
-                           <div class="form-group">
+                        <div class="form-group">
                             <label for="Type">Type</label>
                             <input type="text" class="form-control" id="Type" name="Type" placeholder="Type">
                         </div>
@@ -143,7 +143,7 @@
                             <input type="text" class="form-control" id="Author" name="Author" value="<%= id %>">
                         </div>
 
-                           <div style="display: none" class="form-group">
+                        <div style="display: none" class="form-group">
                             <input type="text" class="form-control" id="Author_Name" name="Author_Name" value="<%= name %>">
                         </div>
 
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-     <!-- modal edit -->
+    <!-- modal edit -->
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -180,7 +180,7 @@
                             <input type="text" class="form-control" id="eDate" name="Date" placeholder="Date">
                         </div>
 
-                           <div class="form-group">
+                        <div class="form-group">
                             <label for="Type">Type</label>
                             <input type="text" class="form-control" id="eType" name="Type" placeholder="Type">
                         </div>
@@ -210,7 +210,7 @@
                             <label for="Comment">Comment</label>
                             <textarea class="form-control" form="modaledit" id="eComment" name='Comment' rows="3"></textarea>
                         </div>
-                           <div style="display: none" class="form-group">
+                        <div style="display: none" class="form-group">
                             <input type="text" class="form-control" id="e_id" name="_id">
                         </div>
 
@@ -228,8 +228,8 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/bootadmin.min.js"></script>
     <script src="js/datatables.min.js"></script>
-     <script src="js/moment.min.js"></script>
-     <script src="js/bootstrap-material-datetimepicker.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-material-datetimepicker.js"></script>
     <script type="text/javascript">
 
       function modaledit(intel){
