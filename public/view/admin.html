@@ -55,7 +55,7 @@
                         <tbody>
                             <% for(var i=0; i<users.length; i++) { %>
                              <% if (role == 3 || users[i].handler == name || !users[i].role) {%>
-                            <tr>
+                             <tr id='<%= intel[i]._id %>'> 
                                 <td><%= users[i].ID %></td>
                                 <td><%= users[i].Name %></td>
                                 <% if (users[i].role) {%>
