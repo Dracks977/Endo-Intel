@@ -238,9 +238,12 @@
 
     function rmop(id) {
         $.post( "/oprm",{_id : id} , function( data ) {
-          console.log(data);
+          if (data == 200) {
+            $("#" + id).remove();
+          }
       });
     }
+    
     $(document).ready( function () {
         $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#eDate').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
