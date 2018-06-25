@@ -238,13 +238,13 @@
 
     function rmop(id) {
         $.post( "/oprm",{_id : id} , function( data ) {
-          if (data == 200) {
+          if (data == "OK") {
             $("#" + id).remove();
           }
       });
     }
-    
-    $(document).ready( function () {
+
+    $(document).ready( function() {
         $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#eDate').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#table_id').DataTable();

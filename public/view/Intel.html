@@ -249,7 +249,7 @@
 
         function rmop(id) {
         $.post( "/oprm",{_id : id} , function( data ) {
-          if (data == 200) {
+          if (data == "OK") {
             $("#" + id).remove();
           }
       });
