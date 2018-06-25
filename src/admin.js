@@ -69,6 +69,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 		}	
 	});
 
+
 	/*
 	* Route de edit intel
 	* 

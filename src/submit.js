@@ -25,6 +25,18 @@ module.exports = function(app, path, ejs, fs, intel, esso){
 	})
 
 
+	app.post('/oprm', (req, res) => {
+		if (req.session.db.role >= 0){
+			intel.update({_id : ObjectId(req.body._id)},{$set : {deleted : true}},function(err, ress){
+				if (err)
+					res.send(err);
+				else{
+					res.sendStatus(200);
+				}
+			});
+		}
+	});
+
 	/*
 	* Route de ajout intel
 	* 
