@@ -56,7 +56,9 @@
                             </tr>
                         </thead>
 
-                        <% for(var i=0; i<intel.length; i++) { %>
+                        <% for(var i=0; i<intel.length; i++) {
+                             if (!intel[i].deleted) {
+                        %>
                         <tr id='<%= intel[i]._id %>'> 
                             <td><%= intel[i].Group %></td>
                             <td><%= intel[i].Type %></td>
@@ -66,6 +68,7 @@
                             <td><%= intel[i].Comment %></td>
                             <td class="dt-center"><div><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit</button><button style='margin-left: 1em;'type="button" class="btn btn-outline-danger btn-sm">Remove</button></div></td>
                         </tr>
+                        <% } %>
                         <% } %>
                         <tbody>
 
