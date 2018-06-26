@@ -16,6 +16,8 @@ const url = 'mongodb://'+ process.env.DB_HOST +':'+ process.env.DB_PORT +'/' + p
 const esso = require('eve-sso-simple');
 var schedule = require('node-schedule');
 const moment = require('moment');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 /*======================================================*/
 
 // Middleware session
