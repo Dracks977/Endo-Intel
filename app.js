@@ -56,7 +56,7 @@ MongoClient.connect(url, function(err, client) {
 	},
 	true
 	);
-
+	job.start();
 })
 
 /*======================route fichier static (public)====================*/
