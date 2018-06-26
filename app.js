@@ -46,28 +46,21 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
-	var now = moment().add(4, 'h');;
-
-	intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
-		result.forEach(function(element) {
-			var date = moment(element.Date)
-			if (moment(date).isBefore(now)){
-				intel.update({_id : ObjectId(element._id)}, {$set:{deleted : true}},function(err, ress){
-					if (err)
-						console.log(err)
-					else{
-						console.log("====> achived : " + element._id);
-					}
-				})	
-			}
-		});
-	})
-
-
 	var job = new CronJob("0 0 * 0-6 * *", function() {
+		var now = moment().add(4, 'h');;
+
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
-				console.log(element);
+				var date = moment(element.Date)
+				if (moment(date).isBefore(now)){
+					intel.update({_id : ObjectId(element._id)}, {$set:{deleted : true}},function(err, ress){
+						if (err)
+							console.log(err)
+						else{
+							console.log("====> achived : " + element._id);
+						}
+					})	
+				}
 			});
 		})
 	}, function () {
