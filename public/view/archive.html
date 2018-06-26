@@ -39,7 +39,7 @@
                 <% } %>
                 <li><a href="/intel"><i class="fa fa-fw fa-info"></i> Intel</a></li>
                 <% if (role == 3) { %>
-                <li><a href="/archive"><i class="fa fa-fw fa-users"></i> Archived intel</a></li>
+                <li><a href="/archive"><i class="fa fa-fw fa-archive"></i> Archived intel</a></li>
                 <% } %>
             </ul>
         </div>
@@ -59,7 +59,6 @@
                                 <th>Comment</th>
                                 <% if (role == 3) { %>
                                 <th>By</th>
-                                <th>Action</th>
                                 <% } %>
                             </tr>
                         </thead>
@@ -77,7 +76,6 @@
                             <td><%= intel[i].Comment %></td>
                             <% if (role == 3) { %>
                             <td><%= intel[i].Author_Name %></td>
-                            <td class="dt-center"><div><button id='' onclick="modaledit(<%= JSON.stringify(intel[i]) %>)" data-toggle="modal" data-target="#editmodal" type="button" class="btn btn-primary btn-sm btn-outline-info">Edit</button><button onclick="rmop('<%= intel[i]._id %>')" style='margin-left: 1em;'type="button" class="btn btn-outline-danger btn-sm">Remove</button></div></td>
                             <% } %>
                         </tr>
                         <% } %>
