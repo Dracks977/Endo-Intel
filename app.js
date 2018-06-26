@@ -49,7 +49,8 @@ MongoClient.connect(url, function(err, client) {
 	var now = moment();
 
 	intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
-			result.forEach(function(element) {
+			result.forEach(function(element) {*
+				console.log(element.date)
 				var date = moment(element.date)
 				console.log(date)
 			});
