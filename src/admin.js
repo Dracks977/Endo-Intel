@@ -57,7 +57,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	app.get('/archive', function(req, res){
 		if (req.session.db){
 			if (req.session.db.role == 3){
-				intel.find({deleted:true}).toArray(function(err, result) {
+				intel.find({deleted: {$eq: true}}).toArray(function(err, result) {
 					fs.readFile(path.resolve(__dirname + '/../public/view/archive.html'), 'utf-8', function(err, content) {
 						if (err) {
 							res.end('error occurred' + err);
