@@ -21,13 +21,12 @@ const moment = require('moment');
 // Middleware session
 app.engine('html', require('ejs').renderFile);
 
-app.use(session(
-{
-	secret: process.env.COOKIE,
-	saveUninitialized: false,
-	resave: false
-}
-));
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'keyboard cat',
+  store: new RedisStore
+}));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 
