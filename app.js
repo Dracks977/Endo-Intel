@@ -15,6 +15,7 @@ const session = require('express-session');
 const url = 'mongodb://'+ process.env.DB_HOST +':'+ process.env.DB_PORT +'/' + process.env.DB_NAME;
 const esso = require('eve-sso-simple');
 const CronJob = require('cron').CronJob;
+const moment = require('moment');
 /*======================================================*/
 
 // Middleware session
@@ -45,6 +46,14 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
+	intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
+			result.forEach(function(element) {
+				console.log(element);
+				console.log(moment().format(element.Date))
+			});
+		})
+
+
 	var job = new CronJob("0 0 * 0-6 * *", function() {
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
@@ -57,6 +66,7 @@ MongoClient.connect(url, function(err, client) {
 	true
 	);
 	job.start();
+	console.log('job status', job.running);
 })
 
 /*======================route fichier static (public)====================*/
