@@ -51,7 +51,8 @@ MongoClient.connect(url, function(err, client) {
 	intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
 				var date = moment(element.Date)
-				
+				console.log(element.Date)
+				console.log(moment(now).isBefore(date))
 			});
 		})
 
