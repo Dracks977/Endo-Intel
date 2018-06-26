@@ -45,7 +45,7 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
-	var job = new CronJob("0 0 * ? * *", function() {
+	var job = new CronJob("0 0 * 0-6 * *", function() {
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
 				console.log(element);
