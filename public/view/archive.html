@@ -262,7 +262,12 @@
         $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#eDate').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#table_id').DataTable({
-            responsive: true
+            responsive: true,
+            colReorder: true,
+            buttons: [
+        'copy', 'excel', 'pdf'
+    ]
+
         });
 
     } );
