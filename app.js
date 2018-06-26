@@ -50,6 +50,7 @@ MongoClient.connect(url, function(err, client) {
 			result.forEach(function(element) {
 				console.log(element);
 				console.log(moment().format(element.Date))
+				console.log(moment().format())
 			});
 		})
 
