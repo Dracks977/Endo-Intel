@@ -51,7 +51,7 @@ MongoClient.connect(url, function(err, client) {
 				console.log(element);
 				console.log(moment().format(element.Date))
 				console.log(moment(moment().format()).add(4,'h'))
-				console.log(moment(moment().format().add(4,'h')).isBefore(moment().format(element.Date)));
+				console.log(moment(moment(moment().format()).add(4,'h')).isBefore(moment().format(element.Date)));
 
 			});
 		})
