@@ -46,13 +46,12 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
-	var now = moment();
+	var now = moment().add(4, 'h');;
 
 	intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
-				console.log(element.Date)
 				var date = moment(element.Date)
-				console.log(date)
+				
 			});
 		})
 
