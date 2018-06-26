@@ -65,10 +65,10 @@
                         </thead>
 
                         <% for(var i=0; i<intel.length; i++) { 
-                            if (intel[i].deleted) {
+                        if (intel[i].deleted) {
                         %>
 
-                         <tr id='<%= intel[i]._id %>'> 
+                        <tr id='<%= intel[i]._id %>'> 
                             <td><%= intel[i].Group %></td>
                             <td><%= intel[i].Type %></td>
                             <td><%= intel[i].Date %></td>
@@ -249,19 +249,21 @@
         $('#e_id').val(intel._id);
     }
 
-        function rmop(id) {
+    function rmop(id) {
         $.post( "/oprm",{_id : id} , function( data ) {
           if (data == "OK") {
             $("#" + id).remove();
-          }
-      });
+        }
+    });
     }
     
 
     $(document).ready( function () {
         $('#Date').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
         $('#eDate').bootstrapMaterialDatePicker({ format : 'DD/MM/YY - HH:mm' });
-        $('#table_id').DataTable();
+        $('#table_id').DataTable({
+            responsive: true
+        });
 
     } );
 </script>
