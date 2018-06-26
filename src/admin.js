@@ -32,7 +32,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	app.get('/intel', function(req, res){
 		if (req.session.db){
 			if (req.session.db.role >= 1){
-				intel.find().toArray(function(err, result) {
+				intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 					fs.readFile(path.resolve(__dirname + '/../public/view/Intel.html'), 'utf-8', function(err, content) {
 						if (err) {
 							res.end('error occurred' + err);
@@ -57,7 +57,7 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	app.get('/archive', function(req, res){
 		if (req.session.db){
 			if (req.session.db.role == 3){
-				intel.find().toArray(function(err, result) {
+				intel.find({deleted:true}).toArray(function(err, result) {
 					fs.readFile(path.resolve(__dirname + '/../public/view/archive.html'), 'utf-8', function(err, content) {
 						if (err) {
 							res.end('error occurred' + err);
