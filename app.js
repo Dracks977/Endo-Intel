@@ -46,7 +46,7 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
-	var j = schedule.scheduleJob('*/5 * * * *', function(){
+	var j = schedule.scheduleJob('*/30 * * * *', function(){
 			var now = moment().add(4, 'h');;
 
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
@@ -64,7 +64,6 @@ MongoClient.connect(url, function(err, client) {
 			});
 		})
 	});
-	console.log(j.nextInvocation())
 })
 
 /*======================route fichier static (public)====================*/
