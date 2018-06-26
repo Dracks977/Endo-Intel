@@ -41,7 +41,6 @@
                 <% if (role == 3) { %>
                 <li><a href="/archive"><i class="fa fa-fw fa-users"></i> Archived intel</a></li>
                 <% } %>
-                <li><a href="#"   data-toggle="modal" data-target="#addop"><i  data-toggle="modal" data-target="#addop" class="fa fa-fw fa-space-shuttle"></i> Add OP</a></li>
             </ul>
         </div>
 
@@ -66,7 +65,7 @@
                         </thead>
 
                         <% for(var i=0; i<intel.length; i++) { 
-                            if (!intel[i].deleted) {
+                            if (intel[i].deleted) {
                         %>
 
                          <tr id='<%= intel[i]._id %>'> 

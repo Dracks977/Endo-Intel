@@ -32,9 +32,14 @@
 
     <div class="d-flex">
         <div class="sidebar sidebar-dark bg-dark">
-            <ul class="list-unstyled">
+                       <ul class="list-unstyled">
+                <% if (role >= 2) { %>
                 <li><a href="/admin"><i class="fa fa-fw fa-users"></i> Member Approval</a></li>
+                <% } %>
                 <li><a href="/intel"><i class="fa fa-fw fa-info"></i> Intel</a></li>
+                <% if (role == 3) { %>
+                <li><a href="/archive"><i class="fa fa-fw fa-users"></i> Archived intel</a></li>
+                <% } %>
             </ul>
         </div>
 

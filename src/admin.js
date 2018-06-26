@@ -52,6 +52,31 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 
 
 	/*
+	* Route page intel
+	*/
+	app.get('/archive', function(req, res){
+		if (req.session.db){
+			if (req.session.db.role == 3){
+				intel.find().toArray(function(err, result) {
+					fs.readFile(path.resolve(__dirname + '/../public/view/archive.html'), 'utf-8', function(err, content) {
+						if (err) {
+							res.end('error occurred' + err);
+							return;
+						}
+							let renderedHtml = ejs.render(content, {id: req.session.db.ID, name: req.session.db.Name, intel: result,role: req.session.db.role, sname: process.env.S_NAME});  //get redered HTML code
+							res.end(renderedHtml);
+						});
+				})
+			} else {
+				res.redirect('/');
+			}
+		} else {
+			res.redirect('/');
+		}
+	})
+
+
+	/*
 	* Edit membres
 	*/
 	app.post('/RoleM', (req, res) => {
