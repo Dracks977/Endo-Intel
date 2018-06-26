@@ -14,7 +14,7 @@ const path = require('path');
 const session = require('express-session');
 const url = 'mongodb://'+ process.env.DB_HOST +':'+ process.env.DB_PORT +'/' + process.env.DB_NAME;
 const esso = require('eve-sso-simple');
-const CronJob = require('cron').CronJob;
+var schedule = require('node-schedule');
 const moment = require('moment');
 /*======================================================*/
 
@@ -46,8 +46,8 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/admin.js')(app, path, ejs, fs, users, esso, intel);
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
-	var job = new CronJob("0 0 * 0-6 * *", function() {
-		var now = moment().add(4, 'h');;
+	var j = schedule.scheduleJob('*/5 * * * *', function(){
+			var now = moment().add(4, 'h');;
 
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
@@ -63,13 +63,8 @@ MongoClient.connect(url, function(err, client) {
 				}
 			});
 		})
-	}, function () {
-		console.log('===Intel archived===')
-	},
-	true
-	);
-	job.start();
-	console.log('job status', job.running);
+	});
+	console.log(j.nextInvocation())
 })
 
 /*======================route fichier static (public)====================*/
