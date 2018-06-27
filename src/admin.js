@@ -81,6 +81,10 @@ module.exports = function(app, path, ejs, fs, users, esso, intel){
 	*/
 	app.post('/RoleM', (req, res) => {
 		if (req.session.db.role >= 2){
+			if (req.body.role >= 1 && req.session.db.role != 3) {
+				res.redirect('/');
+				return
+			}
 			let request = {handler: req.body.handler, role: req.body.role }
 			users.update({ID : parseInt(req.body.ID)},{$set : request},function(err, ress){
 				if (err)
