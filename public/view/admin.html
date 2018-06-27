@@ -118,9 +118,14 @@
                                         <label for="handler">Handler</label>
                                         <select class="form-control" id="handler" name="handler">
                                             <option value=" "></option>
-                                            <% for(var i=0; i<users.length; i++) { %>
-                                            <option value="<%= users[i].Name %>"><%= users[i].Name %></option>
-                                            <% } %>
+                                            <% for(var i=0; i<users.length; i++) { 
+                                                if (users[i].role >= 2) {
+                                            %>
+                                                <option value="<%= users[i].Name %>"><%= users[i].Name %></option>
+                                            <% 
+                                                }
+                                            } 
+                                            %>
                                         </select>
                                     </div>
                                     <div style="display: none" class="form-group">
