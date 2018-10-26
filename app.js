@@ -47,19 +47,19 @@ MongoClient.connect(url, function(err, client) {
 	require('./src/submit.js')(app, path, ejs, fs, intel, esso);
 
 	var j = schedule.scheduleJob('*/30 * * * *', function(){
-			var now = moment().add(4, 'h');;
+			var now = moment().add(4, 'h');
 
 		intel.find({deleted: {$ne: true}}).toArray(function(err, result) {
 			result.forEach(function(element) {
 				var date = moment(element.Date)
-				if (moment(date).isBefore(now)){
+				if (moment(date).isAfter(now)){
 					intel.update({_id : ObjectId(element._id)}, {$set:{deleted : true}},function(err, ress){
 						if (err)
 							console.log(err)
 						else{
 							console.log("====> achived : " + element._id);
 						}
-					})	
+					})
 				}
 			});
 		})
